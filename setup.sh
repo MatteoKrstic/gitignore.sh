@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # This script is used to install the gsh program.
 
@@ -25,9 +25,17 @@ OSCheck() {
         Linux
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         OSX
+    elif [[ "$OSTYPE" == "cygwin" ]]; then
+        echo "POSIX compatibility layer and Linux environment emulation for Windows"
+    elif [[ "$OSTYPE" == "msys" ]]; then
+        echo "lightweight shell and GNU utilities compiled for Windows (part of MinGW)"
     elif [[ "$OSTYPE" == "win32" ]]; then
         Win32
+    elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        echo "FreeBSD"
     else
-        echo "Unknown, please use a normal os or install this manually"
+        echo "Unknown operating system"
     fi
 }
+
+OSCheck

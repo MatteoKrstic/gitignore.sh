@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # This script is used to run the main program.
 # The scope of the program is to be able to generate every gitignore troughout a terminal command.
