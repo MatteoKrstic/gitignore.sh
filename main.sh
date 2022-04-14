@@ -5,3 +5,29 @@
 
 # made by Valerio C.(Thebigbot#2222) and Matteo K.(Matteo Krstic#8397)
 # version 1.0
+
+### Function ###
+
+check_if_gitignore_exists() {}
+
+add_line_to_gitignore() {}
+
+### Main ###
+
+case "$1" in
+
+"add")
+    echo ""
+    ;;
+
+"-h" | "--help")
+    echo "Usage: gsh [add]"
+    echo "add: add a line to the gitignore file"
+    echo ""
+    ;;
+
+*)
+    echo "Hello!"
+    ;;
+
+esac
