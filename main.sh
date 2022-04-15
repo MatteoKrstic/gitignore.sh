@@ -27,7 +27,8 @@ case "$1" in
     ;;
 
 *)
-    echo "Hello!"
+    echo "\e[32mWelcome to gsh, the best .gitignore generator\e[0m\n"
+    read -p "Create .gitignore file? [y/n] " yn
     ;;
 
 esac
