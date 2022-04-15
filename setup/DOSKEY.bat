@@ -1,0 +1,1 @@
+DOSKEY gsh = python3
