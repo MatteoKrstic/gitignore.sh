@@ -4,6 +4,7 @@ echo "\e[93mAdd gsh in your system...\e[0m"
 mkdir ~/.gsh
 touch ~/.gsh/gsh.sh
 touch ~/.gsh/gsh_err.log
+mkdir ~/.gsh/custom
 CON="$(curl https://raw.githubusercontent.com/MatteoKrstic/gitignore.sh/main/main.sh)"
 echo "$CON" >> ~/.gsh/gsh.sh
 echo "alias gsh='sh ~/.gsh/gsh.sh'" >> ~/.bashrc
