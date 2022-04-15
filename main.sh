@@ -8,16 +8,29 @@
 
 ### Function ###
 
-check_if_gitignore_exists() {}
+build_gitignore() {
+    touch .gitignore
+}
 
-add_line_to_gitignore() {}
+add_line_to_gitignore() {
+    CON="$(curl https://raw.githubusercontent.com/github/gitignore/main/$1.gitignore)"
+    if [ $CON === "404: Not Found" ]; then
+        echo "\e[91mThe gitignore "$1" doesn't exist!\e[0m"
+    else
+        echo "$CON" >>.gitignore
+        echo "\e[92mThe gitignore "$1" has been added!\e[0m"
+    fi
+}
 
 ### Main ###
 
 case "$1" in
 
 "add")
-    echo ""
+    build_gitignore
+    echo "\e[93mSearching "$2" in the github gitignore registry....\e[0m"
+    echo "\e[93mGET -> https://raw.githubusercontent.com/github/gitignore/main/$2.gitignore\e[0m"
+    add_line_to_gitignore "$2"
     ;;
 
 "-h" | "--help")
@@ -29,6 +42,21 @@ case "$1" in
 *)
     echo "\e[32mWelcome to gsh, the best .gitignore generator\e[0m\n"
     read -p "Create .gitignore file? [y/n] " yn
+    case $yn in
+    [Yy]*)
+        echo "\e[93mCreating .gitignore file...\e[0m"
+        build_gitignore
+        echo "\e[92mCreated .gitignore file!\e[0m"
+        ;;
+    [Nn]*)
+        echo "\e[93mOkay, bye\e[0m"
+        ;;
+    *)
+        echo "\e[93mCreating .gitignore file...\e[0m"
+        build_gitignore
+        echo "\e[92mCreated .gitignore file!\e[0m"
+        ;;
+    esac
     ;;
 
 esac
