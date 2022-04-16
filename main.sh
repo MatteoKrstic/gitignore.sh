@@ -40,14 +40,16 @@ case "$1" in
     ;;
 
 "create-custom" | "cc")
-    echo "What is the name of the gitignore file?"
-    read -r name
     CON="$(cat .gitignore)"
-    touch ~/.gsh/custom/$name.gitignore
-    echo "$CON" >> ~/.gsh/custom/$name.gitignore
-    echo "\e[92mThe gitignore "$name" has been created!\e[0m"
+    touch ~/.gsh/custom/$2.gitignore
+    echo "$CON" >> ~/.gsh/custom/$2.gitignore
+    echo "\e[92mThe gitignore "$2" has been created!\e[0m"
     ;;
 
+"delete-custom" | "dc")
+    rm ~/.gsh/custom/$2.gitignore
+    echo "\e[92mThe gitignore "$2" has been deleted!\e[0m"
+    ;;
 *)
     echo "\e[32mWelcome to gsh, the best .gitignore generator\e[0m\n"
     read -p "Create .gitignore file? [y/n] " yn
