@@ -4,3 +4,6 @@
 
 # made by Valerio C.(Thebigbot#2222) and Matteo K.(Matteo Krstic#8397)
 # version 1.0
+
+Write-Output "hello from gsh"
+

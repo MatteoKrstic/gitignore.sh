@@ -1,0 +1,1 @@
+powershell C:\devStuff\progetti che vanno su gitHUB\gitignore.sh\main.ps1 
