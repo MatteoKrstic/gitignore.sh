@@ -39,6 +39,15 @@ case "$1" in
     echo ""
     ;;
 
+"create-custom" | "cc")
+    echo "What is the name of the gitignore file?"
+    read -r name
+    CON="$(cat .gitignore)"
+    touch ~/.gsh/custom/$name.gitignore
+    echo "$CON" >> ~/.gsh/custom/$name.gitignore
+    echo "\e[92mThe gitignore "$name" has been created!\e[0m"
+    ;;
+
 *)
     echo "\e[32mWelcome to gsh, the best .gitignore generator\e[0m\n"
     read -p "Create .gitignore file? [y/n] " yn
