@@ -1,18 +1,25 @@
 #!/bin/bash
 
+# colors
+YELLOW='\033[0;33m'
+
 
 # curl the latest version of the script
 
-curl https://raw.githubusercontent.com/MatteoKrsticDev/gsh/main/versions/current.txt >> tempVersion.txt
+curl https://raw.githubusercontent.com/MatteoKrsticDev/gsh/main/current.txt >> tempVersion.txt
  
 
 if [ "$(cat tempVersion.txt)" == "$(cat current.txt)" ]; then
     echo "You are already using the latest version of gsh"
     rm tempVersion.txt
+
 else
     echo "Updating gsh"
+    rm current.txt
+    curl https://raw.githubusercontent.com/MatteoKrsticDev/gsh/main/current.txt >> current.txt
+    rm tempVersion.txt
     git fetch 
     git pull
     clear
-    echo "gsh updated"
+    echo -e "${YELLOW}gsh updated${NC}"
 fi
