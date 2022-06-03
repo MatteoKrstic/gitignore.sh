@@ -11,30 +11,34 @@ checkVersion() {}
 # Main functions
 addLine() {
     existFile
-    if [ $1 == "" ]; then echo -e "${RED}Error:${NC} No file name provided"; exit 1; fi
-    content=$(curl )
+    if [ $1 == "" ]; then echo -e "${RED}[ERR]${NC} No file name provided"; exit 1; fi
+    url="https://raw.githubusercontent.com/MatteoKrsticDev/gsh/main/resources/$1.gitignore"
+    if [ $(curl $url) = "404: Not Found"]; then echo -e "${RED}[ERR]${NC} File not found"; exit 1; fi
+    content=$(curl $url)
+    echo "### $1.gitignore ###\n\n$content\n" >> .gitignore
+    echo -e "${GREEN}[OK]${NC} $1.gitignore added to .gitignore"
 }
 
 existFile() {
     if [ -f ".gitignore" ]; then
-        echo "${YELLOW}.gitignore exist, installing template${NC}"
+        echo "${YELLOW}[IN]${NC} .gitignore exist, installing template"
     else
         read -p ".gitignore not found, do you want to create it? [y/n] " yn
 
         case $yn in
         [Yy]*)
             touch .gitignore
-            echo "${GREEN}Creating .gitignore${NC}"
-            echo "${YELLOW}I continue with the installation...${NC}"
+            echo -e "${GREEN}Creating .gitignore${NC}"
+            echo -e "${YELLOW}[IN]${NC} continue with the installation..."
             ;;
         [Nn]*)
-            echo "${RED}Please create .gitignore manually or use gsh init${NC}"
+            echo -e "${RED}[ERR]${NC} Please create .gitignore manually or use gsh init"
             exit 1
             ;;
         *)
             touch .gitignore
-            echo "${GREEN}Creating .gitignore${NC}"
-            echo "${YELLOW}I continue with the installation...${NC}"
+            echo -e "${GREEN}Creating .gitignore${NC}"
+            echo -e "${YELLOW}[IN]${NC} I continue with the installation..."
             ;;
         esac
     fi
@@ -44,14 +48,15 @@ existFile() {
 case $1 in
 "add" | "a")
     existFile
+    addLine $2
     ;;
 "init" | "i")
     if [ -f ".gitignore" ]; then
-        echo "${RED}You already have a .gitignore file${NC}"
+        echo -e "${RED}[ERR]${NC} You already have a .gitignore file"
         exit 1
     else
         touch .gitignore
-        echo "${GREEN}Creating .gitignore${NC}"
+        echo -e "${GREEN}[OK]Creating .gitignore${NC}"
     fi
     ;;
 
