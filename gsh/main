@@ -14,7 +14,7 @@ addLine() {
     if [ $1 == "" ]; then echo -e "${RED}[ERR]${NC} No file name provided"; exit 1; fi
     url="https://raw.githubusercontent.com/MatteoKrsticDev/gsh/main/resources/$1.gitignore"
     if [ $(curl $url) = "404: Not Found"]; then echo -e "${RED}[ERR]${NC} File not found"; exit 1; fi
-    content=$(curl $url)
+    content=$(curl $url | sed 's/\r//g') 
     echo "### $1.gitignore ###\n\n$content\n" >> .gitignore
     echo -e "${GREEN}[OK]${NC} $1.gitignore added to .gitignore"
 }
@@ -28,7 +28,7 @@ existFile() {
         case $yn in
         [Yy]*)
             touch .gitignore
-            echo -e "${GREEN}Creating .gitignore${NC}"
+            echo -e "${GREEN}[OK]${NC} Creating .gitignore"
             echo -e "${YELLOW}[IN]${NC} continue with the installation..."
             ;;
         [Nn]*)
@@ -37,7 +37,7 @@ existFile() {
             ;;
         *)
             touch .gitignore
-            echo -e "${GREEN}Creating .gitignore${NC}"
+            echo -e "${GREEN}[OK]${NC} Creating .gitignore"
             echo -e "${YELLOW}[IN]${NC} I continue with the installation..."
             ;;
         esac
@@ -56,7 +56,7 @@ case $1 in
         exit 1
     else
         touch .gitignore
-        echo -e "${GREEN}[OK]Creating .gitignore${NC}"
+        echo -e "${GREEN}[OK]${NC} Creating .gitignore"
     fi
     ;;
 
