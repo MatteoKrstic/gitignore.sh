@@ -1,1 +1,0 @@
-# This file content is the same as main.sh
