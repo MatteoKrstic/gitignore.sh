@@ -1,2 +1,18 @@
 #!/bin/bash
 
+
+# curl the latest version of the script
+
+LATEST = curl https://github.com/MatteoKrsticDev/gsh/blob/main/versions/current.txt
+
+# checkf the LATEST variable has the same content as the current.txt file else update
+cd ~/gsh/versions
+ls
+if [ "$LATEST" != "$(cat /versions/current.txt)" ]; then
+    echo "Updating gsh..."
+    rm -rf ~/gsh
+    git clone https://github.com/MatteoKrsticDev/gsh
+    echo "gsh updated"
+else
+    echo "gsh is up to date"
+fi
