@@ -7,10 +7,12 @@ ZSH_COLOR='\033[1;34m'
 # check if the shell is zsh or bash
 if [ -n "$ZSH_VERSION" ]; then
     echo -e "${ZSH_COLOR} zsh detected"
-    echo "" >> ~/.zshrc
+    echo "alias gsh = sh ~/gsh/ghs/main " >> ~/.zshrc
+    echo "alias gsh-update = sh ~/gsh/update" >> ~/.zshrc
     source ~/.zshrc
 else
     echo -e "${BASH_COLOR} bash detected"
-    echo "" >> ~/.bashrc
+    echo "alias gsh = sh ~/gsh/ghs/main " >> ~/.bashrc
+    echo "alias gsh-update = sh ~/gsh/update" >> ~/.bashrc
     source ~/.bashrc
 fi
